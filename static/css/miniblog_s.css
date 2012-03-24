@@ -1,0 +1,331 @@
+body {
+    padding:0;
+    margin:0;
+    font-size:12px;
+    font-family:Arial;
+}
+
+a {
+    color:green;
+    text-decoration:none;
+}
+
+#box {
+    width:75%;
+    margin:0 auto;
+    margin-top:2%;
+    text-align:left;
+}
+
+#left_content {
+    width:33%;
+    float:left;
+    background:#FFFFFF url(/static/images/top.jpg) no-repeat scroll 0 0;    
+}
+
+#right_content {
+    width:70%;
+    margin-left:30%;
+    background:#FFFFFF url(/static/images/bg.jpg) repeat-x scroll 0 0;
+}
+
+#footer {
+    background-color:#FFFFFF;
+    border-top:1px solid #CCCCFF;
+    padding:20px;
+}
+.clear {
+    clear:both;
+}
+#nav {
+    margin-right:200px;
+}
+
+#nav li {
+    font-size:14px;
+    float:right;
+    padding:10px 10px;
+    color:white;
+    margin-top:1px;
+    list-style-type:none;
+}
+
+#preview {
+    margin-top:210px;
+}
+
+.new_a dt{
+    font-size:18px;
+    color:green;
+    margin-bottom:5px;
+    margin-left:10px;
+}
+
+.tags {
+    margin-bottom:30px;
+}
+.tags dt {
+    font-size:18px;
+    color:green;
+    margin-bottom:5px;
+    margin-left:10px;    
+}
+
+.tags dd {
+    color:#0099FF;
+    float:right;
+    margin:10px 20px 10px 0;
+}
+
+.new_a dd {
+    border-bottom:1px dashed gray;
+    color:green;
+    padding:5px;
+    margin-right:30px;
+    margin-left:53px;
+    overflow:hidden;
+}
+
+.new_a dd span {
+    float:right;
+}
+
+#core {
+}
+
+.artical {
+    padding-top:20px;
+    margin-right:20px;
+    margin-left:40px;    
+    border-bottom:1px dashed gray;
+}
+
+.comment {
+    margin:10px 20px 0 80px;
+    border:1px solid #CCCCFF;
+}
+
+.comment dd {
+    margin-top:10px;
+}
+
+.comment dt a{
+    margin-left:50px;
+}
+
+.comment dl {
+    margin-left:40px;
+    color:gray;
+    margin-bottom:10px;
+}
+
+#comment {
+    margin-top:30px;
+    
+}
+#content {
+    width:300px;
+    height:200px;
+}
+.artical dt {
+    text-align:center;
+    color:green;
+    font-size:20px;
+}
+.core_content{
+    color:blue;
+    padding:7px 0 20px 0;
+    line-height:20px;
+}
+
+.date {
+    color:red;
+    text-align:left;
+    margin-bottom:10px;
+    margin-top:20px;
+    background-color:#CCFFFF;
+}
+
+#header_desc_left {
+    margin-top:10px;
+    padding-top:45px;
+    text-align:center;
+}
+
+#header_desc_left span {
+    margin-top:50px;
+    font-size:17px;
+    color:#0099FF;
+}
+
+#header_desr_right {
+    float:right;
+    margin-top:0;
+}
+
+#header_desc_right span {
+    font-size:20px;
+    color:green;
+}
+
+.manage_nav {
+    margin:210px 150px 0 50px;
+}
+
+.manage_nav li {
+    list-style-type:none;
+    padding:10px;
+    font-size:16px;
+    color:green;
+}
+
+.manage_nav li a {
+    text-decoration:none;
+}
+
+.manage_nav .current {
+    background-color:#EED5D2;
+}
+
+#nav .cur {
+    background-color:lime;
+}
+
+#right_cont {
+    padding-top:50px;
+    padding-left:50px;
+}
+
+
+
+.CommanTB {
+    border:1px solid #98FB98;
+    width:600px;
+}
+
+.CommanTB th {
+    border-bottom:1px solid #98FB98;
+}
+
+.wrong {
+    color:red;
+}
+
+#position {
+    color:blue;
+    font-size:12px;
+}
+
+.CommanForm {
+    padding: 10px 0;
+}
+
+.error {
+    margin-left:10px;
+    color:red;
+}
+
+.add_item {
+    color:green;
+    margin-left:570px;
+}
+
+.more {
+    float:right;
+    margin-top:-20px;
+}
+
+.more a {
+    text-decoration:none;
+}
+
+#comment_form {
+    width:550px;
+    margin:20px 0 50px 77px;
+}
+
+#comment_form label {
+    color:green;
+    font-weight:bolder;
+}
+
+#comment_form input:focus {
+    border:1px solid #68228B;
+} 
+
+#comment_form textarea:focus {
+    border:1px solid #68228B;
+}
+
+#comment_form input {
+    border:1px solid #CCCCFF;
+}
+
+#comment_form textarea {
+    border:1px solid #CCCCFF;
+}
+
+.level {
+    color:red;
+    font-weight:bolder;
+}
+
+#comt_to {
+    width:200px;
+    height:20px;
+    margin-left:80px;
+    margin-top:20px;
+    background-color:green;
+    display:none;
+    color:white;
+    padding-left:10px;
+    padding-top:5px;
+}
+
+#cancle_comment {
+    cursor:pointer;
+    margin-left:30px;
+}
+
+.who_comment {
+    color:green;
+    float:right;
+    margin-right:20px;
+    cursor:pointer;
+}
+
+.del_comment {
+    margin:10px 20px 0 80px;
+    border:1px solid #CCCCFF;       
+}
+
+.del_comment dt{
+    color:gray;
+    text-decoration:line-through;
+}
+
+.del_comment dd {
+    color:gray;
+    text-decoration:line-through;
+}
+
+#paginator {
+    padding:5px 0;
+    margin-top:20px;
+    margin-left:30px;
+    
+}
+
+.page_number{
+    padding:3px 7px;
+    border:1px solid #CCCCFF;
+    margin-left:10px;
+}
+
+.current_page {
+    border:1px solid #CCCCFF;
+    padding:3px 7px;
+    margin-left:10px;  
+    background-color:#CCFFCC;
+    font-weight:bolder;
+}

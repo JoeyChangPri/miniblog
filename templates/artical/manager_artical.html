@@ -1,0 +1,27 @@
+<%inherit file="../manager_base.html" />
+
+
+<%def name="title()">
+文章管理
+</%def>
+
+<%def name="position()">
+   当前位置:>>文章管理
+
+</%def>
+
+<p class="add_item"><a href="/manager/artical_add">添加</a></p>
+
+<table class="CommanTB">
+<tr><th>ID</th><th>文章名</th><th>作者</th><th>日期</th><th>评论数</th><th>管理</th></tr>
+
+%for artical, sum in articals:
+   <tr><td>${artical['id']}</td>
+   <td><a href="/manager/artical_edit/${artical['id']}">${artical['title']}</a></td>
+   <td>${artical['author']}</td>
+   <td>${artical['insdate']}</td>
+   <td>${sum}</td>
+   <td><a href="/manager/artical_del/${artical['id']}">删除</a></td></tr>
+%endfor
+
+</table>

@@ -1,0 +1,39 @@
+<%inherit file="../manager_base.html" />
+
+<%def name="js()">
+<script type="text/javascript">
+$(function(){
+    $(".iframe").fancybox({'width':800, 'titlePosition':"insdie"});
+})
+</script>
+</%def>
+
+<%def name="title()">
+分类管理
+</%def>
+
+<%def name="position()">
+   当前位置:>>分类管理
+
+</%def>
+
+<form action="" method="post" class="CommanForm">
+${form.render()}
+</form>
+<p>所有分类</p>
+
+<table class="CommanTB">
+<tr><th>ID</th><th>名称</th><th>操作</th></tr>
+<%!
+from utils.mako_filter import count_artical_by_category
+%>
+%if objs.count() != 0:
+    %for obj in objs:
+       <tr><td>${obj['id']}</td><td><a class="iframe" title="修改${obj['name']}"\
+       href="/manager/cate_edit/${obj['id']}">${obj['name']}\
+    (${count_artical_by_category(obj['id'])})</a></td>\
+    <td><a href='/manager/cate_del/${obj["id"]}'>删除</a></td></tr>
+    %endfor
+%endif 
+
+</table>

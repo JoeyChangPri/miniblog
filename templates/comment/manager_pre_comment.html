@@ -1,0 +1,29 @@
+<%inherit file="../manager_base.html" />
+
+
+<%def name="title()">
+评论管理
+</%def>
+
+<%def name="position()">
+   当前位置:>>评论管理
+
+</%def>
+
+<p class="add_item"></p>
+<br />
+<hr />
+<br />
+<table class="CommanTB">
+<tr><th>ID</th><th>文章名</th><th>作者</th><th>日期</th><th>评论数</th></tr>
+
+%for artical, sum in articals:
+   <tr><td>${artical['id']}</td>
+   <td><a href="/manager/comment_show/${artical['id']}">${artical['title']}</a></td>
+   <td>${artical['author']}</td>
+   <td>${artical['insdate']}</td>
+   <td>${sum}</td>
+   </tr>
+%endfor
+
+</table>

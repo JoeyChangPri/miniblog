@@ -1,0 +1,60 @@
+<%inherit file="../manager_base.html" />
+<%def name="css()">
+<style type="text/css">
+<!--
+.artical {
+    border-bottom:1px dashed #0099FF;
+}
+
+-->
+</style>
+
+</%def>
+
+<%def name="js()">
+<script type="text/javascript">
+</script>
+</%def>
+
+<%def name="position()">
+当前位置:>>评论管理>>显示评论
+</%def>
+
+<dl class="artical">
+<dt>${artical['title']}</dt>
+<dd class="date">--${artical['insdate']}</dd>
+<dd class="core_content">${artical['content']}</dd>
+</dl>
+<div id="comment">
+
+%for i, comment in enumerate(comment_children):
+    %if comment[0]['status']:
+    <dl class="comment">
+    <dt><span class="level" name="${i+1}">${i+1}#</span>&nbsp;&nbsp;<b style="color:#0099FF">${comment[0]['name']}</b>&nbsp;&nbsp;${comment[0]['instime'].strftime("%Y-%m-%d %H:%M:%S")}<a href="/manager/comment_del/${artical['id']}/${comment[0]['id']}">[删除]</a></dt>
+    <dd>${comment[0]['content']}</dd>
+            %for child in comment[1]:
+                %if child['status']:
+                    <dl class="comment">
+                    <dt><b style="color:#0099FF">${child['name']}</b>&nbsp;&nbsp;${child['instime'].strftime("%Y-%m-%d %H:%M:%S")}</dt>
+                    <dd>${child['content']}</dd>
+                %else:
+                    <dl class="del_comment">
+                    <dt><b>${child['name']}</b>&nbsp;&nbsp;${child['instime'].strftime("%Y-%m-%d %H:%M:%S")}</dt>
+                    <dd>${child['content']}</dd>                
+                %endif
+            %endfor 
+            %for i in range(len(comment[1])):
+                </dl>
+            %endfor
+    </dl>
+    %else:
+       <dl class="del_comment">
+           <dt><span class="level" name="${i+1}">${i+1}#</span>&nbsp;&nbsp;<b>${comment[0]['name']}</b>&nbsp;&nbsp;${comment[0]['instime'].strftime("%Y-%m-%d %H:%M:%S")}</dt>
+           <dd>${comment[0]['content']}</dd>
+           </dl>       
+    %endif
+%endfor
+
+</div>
+
+

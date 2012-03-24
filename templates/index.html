@@ -1,0 +1,46 @@
+<%inherit file="base.html" />
+<%def name="keywords()">
+<meta content="${''.join(tip.split(':')[1:])}" name="keywords" />
+</%def>
+<%def name="title()">
+% if tip == '':
+    Chang.Jian
+% else:
+    ${''.join(tip.split(':')[1:])}
+%endif
+</%def>
+% if tip != '':
+    <p id="tip">${tip}</p>
+% endif
+
+<%!
+from utils.mako_filter import count_comment_by_artical
+from utils.mako_filter import get_category_name
+%>
+%if articals.count() != 0:
+    %for artical in articals:
+        <div class="post">
+        <h2><a href="/click/${artical['id']}">${artical['title']}</a></h2>
+        <p class="posted"><span class="meta">${artical['instime'].strftime("%Y-%m-%d %H:%M:%S")} - Posted by \
+            ${artical['author']} in <a href="/category/${artical['category_id']}">\
+            ${artical['category_id']|get_category_name}</a> </span>
+        <span class="comments">views(${int(artical['times'])}) | \
+        comments(${count_comment_by_artical(artical['id'])})</span>
+        </p>
+        <div class="entry">
+        ${artical['content'][:500]}<br />
+        ...
+        </div>
+        <div class="clear"></div>
+        <p class="more"><a href="/click/${artical['id']}">>>查看全部</a></p>
+        </div>
+    %endfor 
+%endif
+
+<div id="paginator">
+${paginator.get_pretty_display()}
+</div>
+
+<div class="clear"></div>
+
+</div>

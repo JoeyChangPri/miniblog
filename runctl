@@ -1,0 +1,41 @@
+#!/usr/bin/env python2.6
+#coding: utf-8
+import sys, os, os.path, signal, zdaemon.zdctl, zdaemon.zdrun,shutil
+
+CONF_FILE = '''<runner>
+program /usr/bin/env python2.6 startup.py deploy
+socket-name /tmp/zdaemon.miniblog.sock
+%(log_files)s
+forever true
+user root
+umask 022
+default-to-interactive false
+</runner>
+'''
+
+def zdaemon_ctl(cmd):
+    conf_file = 'zdaemon.miniblog.conf'
+    log_str = "transcript /tmp/run.miniblog.log"
+    x = CONF_FILE % {'log_files': log_str}
+    if not (os.path.exists(conf_file) and file(conf_file).read() == x):
+        file(conf_file, 'w').write(x)
+    x = ['-C', conf_file, cmd]
+    zdaemon.zdctl.main(x) 
+
+def main():
+    os.chdir(os.path.dirname(sys.argv[0]))
+    try:
+        cmd = sys.argv[1].lower()
+    except:
+        sys.exit('Usage: runctl cmd')
+    else:
+        sys.argv = [zdaemon.zdrun.__file__.rstrip('c'), cmd]
+
+    need_reset = cmd in ('start', 'restart')
+		
+    if need_reset and os.environ.get('DAEMON_MANAGER_MODE'):
+        del os.environ['DAEMON_MANAGER_MODE']
+    zdaemon_ctl(cmd)
+
+if __name__ == '__main__':
+    main()

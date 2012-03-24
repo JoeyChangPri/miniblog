@@ -1,0 +1,39 @@
+<%inherit file="../manager_base.html" />
+
+<%def name="js()">
+<script type="text/javascript">
+$(function(){
+    $(".iframe").fancybox({'width':800, 'titlePosition':"insdie"});
+})
+</script>
+</%def>
+
+<%def name="title()">
+友情链接
+</%def>
+
+<%def name="position()">
+   当前位置:>>友情链接
+
+</%def>
+
+<form action="" method="post" class="CommanForm">
+${form.render()}
+</form>
+<p>所有分类</p>
+<table class="CommanTB">
+<tr><th>ID</th><th>地址</th><th>网站名</th><th>姓名</th><th>日期</th><th>操作</th></tr>
+
+%if objs.count() != 0:
+    %for obj in objs:
+        <tr><td>${obj['id']}</td>
+        <td><a class="iframe" href="/manager/link_edit/${obj['id']}">${obj['link_addr']}</a>
+        </td><td>${obj['link_name']}</td>
+        <td>${obj['friend_name']}</td>
+        <td>${obj['insdate'].strftime("%Y-%m-%d %H-%M-%s")}</td>
+        <td><a href="/manager/link_del/${obj['id']}">删除</a></td>
+        </tr>
+    %endfor
+%endif 
+
+</table>

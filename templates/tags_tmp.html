@@ -1,0 +1,13 @@
+<%
+    import random
+    import urllib
+    choices = ['color1', 'color2', 'color3']
+%>
+%if tags:
+<div id="div1">
+    %for tag in tags:
+    <a href="/tags?tag=${tag}" class="${random.choice(choices)}">\
+    ${urllib.unquote(tag)}</a>
+    %endfor
+</div>
+%endif

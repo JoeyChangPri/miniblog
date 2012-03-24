@@ -1,0 +1,48 @@
+<%inherit file="../manager_base.html" />
+
+<%def name="css()">
+<link rel="stylesheet" type="text/css" href="/static/markitup/skins/markitup/style.css" />
+<!--  markItUp! toolbar skin -->
+<link rel="stylesheet" type="text/css" href="/static/markitup/sets/html/style.css" />
+<style type="text/css">
+#content {
+    width:530px;
+    height:300px;
+}
+</style>
+
+</%def>
+
+<%def name="js()">
+<script type="text/javascript" src="/static/js/kindeditor.js"></script>
+<!-- markItUp! toolbar settings -->
+<!-- markItUp! skin -->
+<script type="text/javascript">
+KE.show({
+				id : 'content',
+				shadowMode : false,
+				autoSetDataMode: false,
+				allowPreviewEmoticons : false,
+				afterCreate : function(id) {
+					KE.event.add(KE.$('artical_add'), 'submit', function() {
+						KE.util.setData(id);
+					});
+				}
+			});
+
+</script>
+</%def>
+
+
+<%def name="title()">
+新增文章
+</%def>
+
+<%def name="position()">
+   当前位置:>>文章管理>>新增文章
+</%def>
+
+<form id='artical_add' action="" method="post" class="CommanForm">
+${form.render()}
+</form>
+

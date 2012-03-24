@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+${self.keywords()}
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
+<title>${self.title()}</title>
+<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/SyntaxHighlighter.css" />
+${self.css()}
+<script type="text/javascript" src="/static/js/jquery-1.4.2.js" /></script>
+<script type="text/javascript" src="/static/js/miniblog.js"></script>
+<script type="text/javascript" src="/static/js/miaov.js"></script>
+<script type="text/javascript" src="/static/js/shCore.js"></script>
+<script type="text/javascript" src="/static/js/shBrushPython.js"></script>
+<script type="text/javascript">
+$(function(){
+    loc = window.location.pathname;
+    switch(loc) {
+        case '/':$("#home").addClass("highlight");break;
+		case '/board':$("#board").addClass("highlight");break;
+        default:$("#home").addClass("highlight");break;
+    }
+})
+</script>
+${self.js()}
+
+</head>
+<body>
+
+<div id="container">
+
+	<div id="header">	
+		<h1><a href="/">CHANG<span>JIAN</span></a></h1>
+		<p>Do you remember..</p>
+
+		<!-- ### Top Menu ### -->
+
+		<div id="topmenu">
+		<ul>
+			<li><a href="/" id="home">Home</a></li>	
+			<li><a href="/board" id="board">Board</a></li>	
+			<li><a href="#" id="photoes">Photos</a></li>
+			<li><a href="#" id="about">About</a></li>		
+		</ul>	
+		</div>
+
+	</div>
+	
+	<div id="contentcontainer">
+	
+		<div id="content1">
+
+		<!-- ### Post Entry Begin ###  -->
+		${next.body()}
+		
+		<!-- ### Post Entry End ### -->
+		
+		</div>
+		
+		<!-- ### Sidebar Begin ### -->
+
+		
+		<div id="sidebar">
+			
+		<ul>
+
+        <li><h2>最新文章</h2>
+		    <ul>
+			% if pre_articals.count() != 0:
+				% for obj in pre_articals:
+				<li><a href="/click/${obj['id']}">${obj['title'][:20]}</a><span>${obj['insdate']}</span></li>
+				% endfor
+			% endif			
+			</ul>
+        </li>
+		<!--  
+		<li><h2>Search</h2>
+		<form id="searchform" method="post" action="http://www.google.com.hk/search">
+			<div>
+			<input type="text" value="" name="s" id="searchfield" />
+			<input type="submit" id="searchsubmit" value="Search" />
+			</div>
+
+		</form>
+		</li>
+	-->        
+    
+	    <li><h2>最近留言</h2>
+            <ul>
+			% if pre_comments.count() != 0:
+				% for obj in pre_comments:
+					<li><b style="color:#0099FF">${obj['name']}:&nbsp;</b><a href="/click/${obj['artical_id']}">${obj['content'][:14]}</a></li>
+				% endfor 
+			% endif		
+            </ul>    
+		</li>
+	    
+        <li style="padding-bottom:30px;"><h2>标签云</h2>
+            <%include file="tags.html" />
+        </li>	    
+	    
+		<%!
+		from utils.mako_filter import count_artical_by_category
+		%>	    
+		<li><h2>博文分类</h2>
+		<ul>
+			%for obj in pre_categories:
+				<li><a href="/category/${obj['id']}">${obj['name']}</a><span>(${count_artical_by_category(obj['id'])})</span></li>
+			%endfor			
+		</ul>
+
+		</li>
+	    
+	    
+		<li><h2>友情链接</h2>
+            <ul>
+                % if pre_links.count() != 0:
+                    % for link in pre_links:
+                        <li><a href="${link['link_addr']}" target="_blank">${link['link_addr'][:30]}</a>\
+                        <span>${link['link_name']}</span></li>
+                    % endfor
+                % endif			
+            </ul>
+		</li>
+
+       <li>
+           <h2>技术支持</h2>
+           <ul>
+           <li style="text-align:center;"><a href="http://python.org/" target="_blank"><img style="width:170px;" src="/static/images/python-logo.jpg" /></a></li>
+           <li style="text-align:center;"><a href="http://www.makotemplates.org/" target="_blank"><img style="width:170px;" src="/static/images/makoLogo.png" /></a></li>        
+           <li style="text-align:center;"><a href="http://www.mongodb.org/" target="_blank"><img style="width:170px;" src="/static/images/logo-mongodb-home.png" /></a></li>
+           <li style="text-align:center;"><a href="http://webpy.org/" target="_blank"><img style="width:170px;" src="/static/images/webpy.gif" /></a></li>
+           </ul>
+       </li>       
+
+		</ul>	
+		
+		</div>
+
+		<!-- ### Sidebar End ### -->
+
+	</div>
+
+<div id="content2">
+	<p>Copyright &copy; 2011 www.cj53.com <br />
+       Template is provided by <a href='http://www.freecsstemplates.org/' target='_blank'>www.freecsstemplates.org</a><br />
+       特别感谢: <a href="http://www.zlovezl.cn" target='_blank'>--猪之哀伤--</a></p>
+	<!-- ##### Please leave this small link back to my site. Thank You! ##### -->
+</div>
+
+<div id="google_analytics">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20694374-2']);
+  _gaq.push(['_setDomainName', '.cj53.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript">
+dp.SyntaxHighlighter.ClipboardSwf = '/static/js/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+
+</div>
+
+</div>
+</body>
+</html>
+
+<%def name="keywords()">
+<meta content="Chang.Jian" name="keywords" />
+</%def>
+<%def name="title()">
+Chang.Jian
+</%def>
+<%def name="css()">
+</%def>
+<%def name="js()">
+</%def>

@@ -1,0 +1,103 @@
+<%inherit file="base.html" />
+
+<%def name="keywords()">
+<meta content="${artical['title']} ${artical['tags']}" name="keywords" />
+</%def>
+
+<%def name="title()">
+${artical['title']}
+</%def>
+
+<%def name="js()">
+<script type="text/javascript">
+var path = window.location.pathname;
+
+$(function(){
+    $(".who_comment").click(function(){
+        var $cid = $(this).attr('name');
+        var $name = $(this).siblings("b").html()
+        $("input[id=comment_id]").val($cid);
+        $("#comment_to").html("回复&nbsp;&nbsp;&nbsp;"+$name);
+        $("#comt_to").show();
+    });
+    $("#cancle_comment").click(function(){
+        $("input[id=comment_id]").val(0);
+        $("#comt_to").hide();
+    });
+    if (path == '/board') {
+        $(".more").hide();
+        $(".posted").hide();
+    }
+    
+    $("form").submit(function(){
+        if ($(":checkbox").attr("checked")) {
+            $(":checkbox").val("true");
+        }
+        else {
+            $(":checkbox").val("false");
+        }
+        return true;
+    })    
+})
+
+</script>
+</%def>
+
+<%!
+from utils.mako_filter import count_comment_by_artical,\
+get_category_name
+%>
+<div class="post">
+<h2><a href="/click/${artical['id']}">${artical['title']}</a></h2>
+<p class="posted"><span class="meta">${artical['insdate']} - Posted by \
+            ${artical['author']} in <a href="/category/${artical['category_id']}">\
+            ${artical['category_id']|get_category_name}</a> </span>
+       <span class="comments">views(${int(artical['times'])}) | \
+               comments(${count_comment_by_artical(artical['id'])})</span></p> 
+<div class="clear"></div>
+<div class="entry">
+<p>
+${artical['content']}
+</p>
+</div>
+</div>
+<div class="clear"></div>
+<div id="comment">
+
+%for i, comment in enumerate(comments):
+    %if comment[0]['status']:
+        <dl class="comment" id="${comment[0]['id']}_comment">
+        <dt><span class="level" name="${i+1}">${i+1}#</span>&nbsp;&nbsp;<b style="color:#0099FF">${comment[0]['name']}</b>&nbsp;&nbsp;${comment[0]['instime'].strftime("%Y-%m-%d %H:%M:%S")}<span class="who_comment" name="${comment[0]['id']}">[回复]</span></dt>
+        <dd>${comment[0]['content']}</dd>
+            %for child in comment[1]:
+                %if child['status']:
+                    <dl class="comment">
+                    <dt><b style="color:#0099FF">${child['name']}</b>&nbsp;&nbsp;${child['instime'].strftime("%Y-%m-%d %H:%M:%S")}</dt>
+                    <dd>${child['content']}</dd>
+                %else:
+                    <dl class="del_comment">
+                    <dt><b>${child['name']}</b>&nbsp;&nbsp;${child['instime'].strftime("%Y-%m-%d %H:%M:%S")}</dt>
+                    <dd>${child['content']}</dd>                
+                %endif                
+            %endfor 
+            %for i in range(len(comment[1])):
+                </dl>
+            %endfor
+        </dl>
+    %else:
+        <dl class="del_comment">
+        <dt><span class="level" name="${i+1}">${i+1}#</span>&nbsp;&nbsp;<b>${comment[0]['name']}</b>&nbsp;&nbsp;${comment[0]['instime'].strftime("%Y-%m-%d %H:%M:%S")}</dt>
+        <dd>${comment[0]['content']}</dd>
+        </dl>    
+    %endif
+%endfor
+
+</div>
+
+<p id="comt_to"><span id="comment_to"></span><span id="cancle_comment">[取消]</span></p>
+
+<div id="writecomment">
+<form id="commentform" method="post" action="">
+    ${form.render()}
+</form>
+</div>
