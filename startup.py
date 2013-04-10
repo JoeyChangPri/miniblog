@@ -12,8 +12,8 @@ web.config.debug = False
 #configure the mail settings
 web.config.smtp_server = 'smtp.gmail.com'
 web.config.smtp_port = 587
-web.config.smtp_username = 'changjian53@gmail.com'
-web.config.smtp_password = '19032903'
+web.config.smtp_username = '***********'
+web.config.smtp_password = '********'
 web.config.smtp_starttls = True
 
 app = web.application(import_modules(APPS), autoreload=False)
